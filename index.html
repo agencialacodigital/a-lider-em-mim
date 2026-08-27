@@ -1087,9 +1087,9 @@ footer .foot-tag{font-family:var(--font-display);color:var(--turquesa);font-size
     <p class="modal-sub">Preencha seus dados para continuar para o pagamento seguro na Hotmart.</p>
     <form id="leadForm" novalidate>
       <div class="modal-field" data-field="name">
-        <label for="leadName">Nome completo</label>
-        <input type="text" id="leadName" name="name" placeholder="Seu nome completo" autocomplete="name">
-        <span class="field-error">Digite seu nome completo.</span>
+        <label for="leadName">Nome</label>
+        <input type="text" id="leadName" name="name" placeholder="Seu nome" autocomplete="given-name">
+        <span class="field-error">Digite seu nome.</span>
       </div>
       <div class="modal-field" data-field="email">
         <label for="leadEmail">E-mail</label>
@@ -1184,7 +1184,7 @@ function setInvalid(fieldName, invalid){
   field.classList.toggle('invalid', invalid);
 }
 
-nameInput.addEventListener('input', () => { if(nameInput.value.trim().length > 3 && nameInput.value.includes(' ')) setInvalid('name', false); });
+nameInput.addEventListener('input', () => { if(nameInput.value.trim().length >= 2) setInvalid('name', false); });
 emailInput.addEventListener('input', () => { if(/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailInput.value.trim())) setInvalid('email', false); });
 phoneInput.addEventListener('input', () => { if(phoneInput.value.replace(/\D/g,'').length >= 10) setInvalid('phone', false); });
 
@@ -1194,7 +1194,7 @@ leadForm.addEventListener('submit', (e) => {
   const email = emailInput.value.trim();
   const phoneDigits = phoneInput.value.replace(/\D/g,'');
 
-  const nameValid = name.length > 3 && name.includes(' ');
+  const nameValid = name.trim().length >= 2;
   const emailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
   const phoneValid = phoneDigits.length >= 10;
 
